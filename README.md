@@ -1,3 +1,11 @@
+**README**
+
+***Following is the Breakdown of this Repository***
+
+```Redux Conceptual Breakdown```
+
+
+
 - **Store** :  This is like a container that contains everything you required within the Application.
 
 ```jsx
