@@ -63,7 +63,7 @@ const authReducer = (state = intialState, action: any) => {
 - **Dispatch :** Dispatch takes the action and delivers it to redux
 
 ```jsx
- // dispatcher alerts the redux store to by passing the action inside of the dispatcher.
+         // dispatcher alerts the redux store to by passing the action inside of the dispatcher.
 	 	
 	// while this is dispatched application can maintain a loading state.
   dispatch(loginUserRequest(payload))
