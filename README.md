@@ -66,7 +66,7 @@ const authReducer = (state = intialState, action: any) => {
          // dispatcher alerts the redux store to by passing the action inside of the dispatcher.
 	 	
 	// while this is dispatched application can maintain a loading state.
-  dispatch(loginUserRequest(payload))
+        dispatch(loginUserRequest(payload))
 	
 	/* this dispatcher can be user to trigger change in the state of the application 
 		 where you can display ui changes and set it to userlogged in.*/
