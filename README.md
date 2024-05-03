@@ -1,30 +1,89 @@
-# React + TypeScript + Vite
+- **Store** :  This is like a container that contains everything you required within the Application.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```jsx
+const store = createStore(reducer).
+// initializing the reduxstore via the createstore.
+```
 
-Currently, two official plugins are available:
+- **Actions :**  Actions are like little tasks you tell Redux to do with your Application State
+- Redux reads this and knows what to do next.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```jsx
+const addAction = ({type:'CHANGE_SOMETHING"}
+//Example Usage for an action that tells the redux store to trigger change in state.
 
-## Expanding the ESLint configuration
+export const loginUserRequest = (payload: any): AuthActionTypes => {
+    return {
+        type: 'LOGIN_USER_REQUEST',
+        payload: payload
+    }
+};
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```
 
-- Configure the top-level `parserOptions` property like this:
+- **Reducers :** Reducers are special helpers that figure how to perform the state manipulation in your application that was provided to redux via the actions
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+```jsx
+
+const authReducer = (state = intialState, action: any) => {
+    switch (action.type) {
+        case 'LOGIN_USER_REQUEST':
+
+            return {
+                ...state,
+                loading: true,
+                error: null
+            };
+        case ' LOGIN_USER_SUCCESS ':
+            return {
+                ...state,
+                loading: false,
+                token: action.payload,
+                error: null
+
+            }
+        case 'LOGIN_USER_FAILURE':
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case 'SET_AUTH_TOKEN':
+            return {
+                ...state,
+                token: action.payload
+            }
+        default:
+            return state
+    }
+
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **Dispatch :** Dispatch takes the action and delivers it to redux
+
+```jsx
+ // dispatcher alerts the redux store to by passing the action inside of the dispatcher.
+	 	
+	// while this is dispatched application can maintain a loading state.
+  dispatch(loginUserRequest(payload))
+	
+	/* this dispatcher can be user to trigger change in the state of the application 
+		 where you can display ui changes and set it to userlogged in.*/
+	dispatch(loginUserSuccess())
+	
+	/*This sets the token to the global state which can now be used to unlock 
+		other parts of the application.*/
+	dispatch(setAuthToken(token));
+	
+```
+
+- **Subscribe :** Subscribing is like having Redux tell you whenever something new happens within the application , like whenever some sort is action is performed
+
+```jsx
+const listener = ()=> {
+};
+store.subscribe(listener);
+```
+
+ ****
